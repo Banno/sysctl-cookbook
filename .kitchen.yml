@@ -21,9 +21,9 @@ platforms:
 suites:
 - name: default
   run_list:
-    - recipe[sysctl::attribute_driver]
+    - recipe[sysctl_accumulator::attribute_driver]
   attributes: {
-    sysctl: {
+    sysctl_accumulator: {
       values: {
         "net.core.rmem_default": "262144",
         "net.core.wmem_default": "262144",

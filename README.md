@@ -1,6 +1,6 @@
 DESCRIPTION
 ===========
-Manage sysctl via a sysctl LWRP.
+Manage sysctl via a sysctl_accumulator LWRP.
 
 
 Attributes
@@ -8,19 +8,19 @@ Attributes
 
 | Name | Value | Description
 |:---|:---|:--------
-|`default[:sysctl][:values]` | {}  | Hash Of Key Value pairs the attribute_driver recipe uses.
-|`default[:sysctl][:config_file]` | rhel: `"/etc/sysctl.conf"` debian: `"/etc/sysctl.d/99-chef.conf"` | The file to write values to.
+|`default[:sysctl_accumulator][:values]` | {}  | Hash Of Key Value pairs the attribute_driver recipe uses.
+|`default[:sysctl_accumulator][:config_file]` | rhel: `"/etc/sysctl.conf"` debian: `"/etc/sysctl.d/99-chef.conf"` | The file to write values to.
 
 Recipes
 ---------
 
 | Name | Description |
 |:-----|:------------|
-|attribute_driver.rb| Reads attributes set in `node[:sysctl][:values]`, and sets sysctl resources with  the values
+|attribute_driver.rb| Reads attributes set in `node[:sysctl_accumulator][:values]`, and sets sysctl resources with  the values
 |default.rb| Simply sets up the resources needed to use the lwrp
 |library.rb| Empty recipe if you want to avoid default, but still want to explicitly include (for whatever reason)
 
-Sysctl LWRP
+Sysctl_Accumulator LWRP
 ===========
 
 
@@ -28,7 +28,7 @@ Attributes
 ----------
 | Name | Type | Default | Description   |
 |:-----|:-----|:--------|:--------------|
-| `name` | `String` | `:name_attribute` |The key name. Defaults to the resource name i.e. sysctl "some.key"
+| `name` | `String` | `:name_attribute` |The key name. Defaults to the resource name i.e. sysctl_accumulator "some.key"
 | `value`| `String`, `Fixnum`, `Integer` | The Value for this key
 | `save` | boolean | `true` | save the setting back to the node data (default: false)
 
@@ -52,7 +52,7 @@ LWRP
 ----
 Ensure running state, and write this key to sysctl.conf
 
-    sysctl "kernel.sysrq" do
+    sysctl_accumulator "kernel.sysrq" do
        value 1
     end
 
@@ -64,7 +64,7 @@ Attributes
 In a role attribute or override:
 
     {
-      "sysctl": {
+      "sysctl_accumulator": {
         "net.ipv4.tcp_window_scaling": 0
       }
     }

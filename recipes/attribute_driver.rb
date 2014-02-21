@@ -21,8 +21,8 @@
 #
 
 # values from attributes and roles
-node[:sysctl][:values].each_pair do |k,v|
- sysctl k do value v end
+node[:sysctl_accumulator][:values].each_pair do |k,v|
+ sysctl_accumulator k do value v end
 end
 
-include_recipe "sysctl::default"
+include_recipe "sysctl_accumulator::default"

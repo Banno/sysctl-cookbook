@@ -20,7 +20,7 @@
 # limitations under the License.
 #
 
-template node[:sysctl][:config_file] do
+template node[:sysctl_accumulator][:config_file] do
   action :nothing
   source "sysctl.erb"
   owner "root"
@@ -30,8 +30,8 @@ template node[:sysctl][:config_file] do
 end
 
 accumulator "sysctl.conf" do
-  target :template => node[:sysctl][:config_file]
-  filter { |resource| resource.is_a? Chef::Resource::Sysctl}
+  target :template => node[:sysctl_accumulator][:config_file]
+  filter { |resource| resource.is_a? Chef::Resource::SysctlAccumulator }
   transform { |resources|
     list = Array.new
     list = resources.map { |r| r if  r.action.include?(:write) }

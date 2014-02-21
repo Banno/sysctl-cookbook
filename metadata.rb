@@ -1,4 +1,4 @@
-name             "sysctl"
+name             "sysctl_accumulator"
 maintainer       "Jesse Nelson"
 maintainer_email "spheromak@gmail.com"
 license          "Apache 2.0"
